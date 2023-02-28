@@ -14,20 +14,32 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
   const [seconds, setSeconds] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
   const [cicles, setCicles] = useState<number>(numberOfCicles);
+  const [shownCicles, setShownCicles] = useState<number>(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (start && focus >= 0) {
+      if (start && focus >= 0 && cicles > 0) {
         setFocus(focus - 1);
-        
-      } else {
-        if (start && rest >= 0) {
-          setRest(rest - 1);
-        }
+      } else if (start && rest >= 0 && cicles > 0) {
+        setRest(rest - 1);
       }
+      else if(focus < 0 && rest < 0 && cicles > 0){
+        setFocus(focusTime * 60);
+        setRest(restTime * 60);
+        setCicles(cicles - 1);
+        setShownCicles(shownCicles + 1);
+      }else if(cicles === 0){
+        setCicles(numberOfCicles);
+        setShownCicles(1);
+        setStart(false);
+      }
+      console.log(focus);
+      console.log(rest);
+      console.log(cicles);
+      console.log(start);
     }, 1000);
     return () => clearInterval(timer);
-  }, [start, focus, rest]);
+  }, [start, focus, rest, cicles, focusTime, restTime, numberOfCicles, shownCicles]);
 
   useEffect(() => {
     if (focus >= 0) {
@@ -40,8 +52,6 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
       }
     }
   }, [focus, rest]);
-
-
 
   const handleStart = () => {
     setStart(true);
@@ -62,6 +72,12 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
       <div className="p-2">
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}
+      </div>
+      <div>
+        Status: {focus >= 0 && rest > 0 ? 'Foco' : 'Descanso'}
+      </div>
+      <div>
+        Ciclo: {shownCicles}
       </div>
       <div>
         <button onClick={handleStart} className="p-2">
