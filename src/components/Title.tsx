@@ -1,13 +1,21 @@
-import React from 'react'
+import React from "react";
 
 type Props = {
-  innerText: string,
-}
+  innerText: string;
+  subtitle: string;
+};
 
-const Title = ({innerText}: Props) => {
+const Title = ({ innerText, subtitle }: Props) => {
   return (
-    <div className='text-center text-lg p-6 md:text-3xl'>{innerText}</div>
-  )
-}
+    <div>
+      <div className="text-center text-lg p-6 md:text-5xl font-bold">
+        {innerText}
+      </div>
+      <div className="text-center text-lg p-6 md:text-xl font-bold">
+        {subtitle}
+      </div>
+    </div>
+  );
+};
 
-export default Title
+export default Title;
