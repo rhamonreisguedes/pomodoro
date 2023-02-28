@@ -10,7 +10,7 @@ const Home = (props: Props) => {
       <Title innerText={"Escolha a melhor opção para os seus objetivos:"} />
       <div className="w-full flex flex-col md:flex-row md:items-center md:justify-center md:h-96">
         <ChooseBox
-          title={"25:5"}
+          title={"Estratégia 25:5"}
           to={"/25:5"}
           comment={"Indicado para iniciantes"}
           comment2={"- 25 minutos de foco"}
@@ -18,7 +18,7 @@ const Home = (props: Props) => {
           comment4={"- 4 ciclos"}
         />
         <ChooseBox
-          title={"60:10"}
+          title={"Estratégia 60:10"}
           to={"/60:10"}
           comment={"Indicado para experientes"}
           comment2={"- 60 minutos de foco"}
@@ -26,11 +26,11 @@ const Home = (props: Props) => {
           comment4={"- 4 ciclos"}
         />
        <ChooseBox
-          title={"Personalizado"}
+          title={"Estratégia Personalizada"}
           to={"/personalizado"}
           comment={"Indicado para muito experientes."}
-          comment2={"- Tempo de foco da sua maneira"}
-          comment3={"- Tempo de descanso da sua maneira"}
+          comment2={"- Número livre de minutos para foco"}
+          comment3={"- Número livre de minutos para descanso"}
           comment4={"- Quantos ciclos você escolher"}
         />
       </div>

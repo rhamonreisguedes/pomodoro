@@ -4,7 +4,7 @@ type Props = {}
 
 const SixtyperTen = (props: Props) => {
   return (
-    <Clock focusTime={0.1} restTime={0.1} numberOfCicles={3}/>
+    <Clock focusTime={60} restTime={10} numberOfCicles={4}/>
   )
 }
 

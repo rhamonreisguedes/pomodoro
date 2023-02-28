@@ -5,7 +5,7 @@ type Props = {}
 
 const TwentyFiveperFive = (props: Props) => {
   return (
-    <Clock focusTime={0.1} restTime={0.1} numberOfCicles={3}/>
+    <Clock focusTime={25} restTime={5} numberOfCicles={4}/>
   )
 }
 
