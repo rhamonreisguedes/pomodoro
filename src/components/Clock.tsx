@@ -13,33 +13,27 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
   const [start, setStart] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
-  const [cicles, setCicles] = useState<number>(numberOfCicles);
-  const [shownCicles, setShownCicles] = useState<number>(1);
+  const [cicles, setCicles] = useState<number>(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (start && focus >= 0 && cicles > 0) {
+      if (start && focus >= 0 && cicles < numberOfCicles) {
         setFocus(focus - 1);
-      } else if (start && rest >= 0 && cicles > 0) {
+      } else if (start && rest > 0 && cicles < numberOfCicles) {
         setRest(rest - 1);
-      }
-      else if(focus < 0 && rest < 0 && cicles > 0){
+      } else if (rest === 0 && cicles < numberOfCicles) {
         setFocus(focusTime * 60);
         setRest(restTime * 60);
-        setCicles(cicles - 1);
-        setShownCicles(shownCicles + 1);
-      }else if(cicles === 0){
-        setCicles(numberOfCicles);
-        setShownCicles(1);
+        setCicles(cicles + 1);
+      } else if (cicles === numberOfCicles) {
+        setCicles(0);
         setStart(false);
+        setFocus(focusTime * 60);
+        setRest(restTime * 60);
       }
-      console.log(focus);
-      console.log(rest);
-      console.log(cicles);
-      console.log(start);
     }, 1000);
     return () => clearInterval(timer);
-  }, [start, focus, rest, cicles, focusTime, restTime, numberOfCicles, shownCicles]);
+  }, [start, focus, rest, cicles, focusTime, restTime, numberOfCicles]);
 
   useEffect(() => {
     if (focus >= 0) {
@@ -73,12 +67,12 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}
       </div>
+      <div></div>
       <div>
-        Status: {focus >= 0 && rest > 0 ? 'Foco' : 'Descanso'}
+        Ciclo: {cicles + 1 < numberOfCicles ? cicles + 1 : numberOfCicles} /{" "}
+        {numberOfCicles}
       </div>
-      <div>
-        Ciclo: {shownCicles}
-      </div>
+      <div>Status: {focus >= 0 ? "Foco" : "Descanso"}</div>
       <div>
         <button onClick={handleStart} className="p-2">
           Começar
