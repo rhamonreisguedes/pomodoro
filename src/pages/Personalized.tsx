@@ -1,5 +1,6 @@
 import Clock from "../components/Clock";
 import { useState } from "react";
+import image3 from "../images/003.png";
 
 type Props = {};
 
@@ -23,9 +24,9 @@ const Personalized = (props: Props) => {
       !Number.isInteger(+focusTime) ||
       !Number.isInteger(+restTime) ||
       !Number.isInteger(+numberOfCicles) ||
-      focusTime === '0' ||
-      restTime === '0' ||
-      numberOfCicles === '0'
+      focusTime === "0" ||
+      restTime === "0" ||
+      numberOfCicles === "0"
     ) {
       setMessage(true);
     } else {
@@ -48,33 +49,34 @@ const Personalized = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className="bg-green-100 h-screen">
       {form && (
-        <form className="flex flex-col justify-center w-2/3 align-center">
-          <label className="p-2">
-            Foco:
+        <form className="flex flex-col justify-center items-center text-lg md:text-2xl">
+          <p className="font-semibold p-2">Preencha os campos abaixo:</p>
+          <label className="p-2 flex flex-col justify-center items-center">
+            <span className="font-semibold">Foco:</span>
             <input
-              className="p-2 w-1/5"
+              className="p-3"
               type="string"
               placeholder="número de minutos"
               value={focusTime}
               onChange={handleFocusTime}
             />
           </label>
-          <label className="p-2">
-            Descanso:
+          <label className="p-3 flex flex-col justify-center items-center">
+            <span className="font-semibold">Descanso:</span>
             <input
-              className="p-2 w-1/5"
+              className="p-2"
               type="string"
               placeholder="número de minutos"
               value={restTime}
               onChange={handleRestTime}
             />
           </label>
-          <label className="p-2">
-            Ciclos:
+          <label className="p-3 flex flex-col justify-center items-center">
+            <span className="font-semibold">Ciclos:</span>
             <input
-              className="p-2 w-1/5"
+              className="p-2"
               type="string"
               placeholder="número de ciclos"
               value={numberOfCicles}
@@ -86,16 +88,27 @@ const Personalized = (props: Props) => {
             type="submit"
             value="Enviar"
             onClick={handleSubmit}
-            className="bg-red-500"
+            className="bg-green-500 w-3/12 p-3 rounded-md font-semibold hover:bg-green-400 hover:cursor-pointer"
           />
         </form>
       )}
-      {message && <p>Valores Inválidos. Por favor, inserir novos valores.</p>}
+
+      {message && (
+        <div>
+        <p className="text-red-600 font-bold text-lg text-center p-2">
+          Valores Inválidos.
+        </p>
+        <p className="text-red-600 font-bold text-lg text-center p-2">
+          Por favor, inserir novos valores.
+        </p>
+        </div>
+      )}
       {clock && (
         <Clock
           focusTime={+focusTime}
           restTime={+restTime}
           numberOfCicles={+numberOfCicles}
+          image={image3}
         />
       )}
     </div>

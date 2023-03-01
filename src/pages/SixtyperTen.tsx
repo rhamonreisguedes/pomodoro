@@ -1,11 +1,14 @@
-import Clock from "../components/Clock"
+import Clock from "../components/Clock";
+import image2 from "../images/002.png";
 
-type Props = {}
+type Props = {};
 
 const SixtyperTen = (props: Props) => {
   return (
-    <Clock focusTime={60} restTime={10} numberOfCicles={4}/>
-  )
-}
+    <div className="bg-green-100 h-screen">
+      <Clock focusTime={60} restTime={10} numberOfCicles={4} image={image2} />;
+    </div>
+  );
+};
 
-export default SixtyperTen
+export default SixtyperTen;

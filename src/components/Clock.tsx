@@ -5,9 +5,10 @@ type Props = {
   focusTime: number;
   restTime: number;
   numberOfCicles: number;
+  image: string;
 };
 
-const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
+const Clock = ({ focusTime, restTime, numberOfCicles, image }: Props) => {
   const [focus, setFocus] = useState<number>(focusTime * 60);
   const [rest, setRest] = useState<number>(restTime * 60);
   const [start, setStart] = useState<boolean>(false);
@@ -63,24 +64,29 @@ const Clock = ({ focusTime, restTime, numberOfCicles }: Props) => {
 
   return (
     <div className="text-center">
-      <div className="p-2">
+      <div className="text-6xl p-5 md:p-4 md:text-9xl text-green-900 font-semibold">
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}
       </div>
-      <div></div>
-      <div>
-        Ciclo: {cicles + 1 < numberOfCicles ? cicles + 1 : numberOfCicles} /{" "}
-        {numberOfCicles}
+      <div className="flex justify-center p-1">
+        <img src={image} alt='' className="w-1/3 md:w-2/12"/>
       </div>
-      <div>Status: {focus >= 0 ? "Foco" : "Descanso"}</div>
-      <div>
-        <button onClick={handleStart} className="p-2">
+      <div className="text-3xl p-1">
+        <span className="font-semibold">Ciclo: </span>
+        {cicles + 1 < numberOfCicles ? cicles + 1 : numberOfCicles}/ 
+        <span className="font-semibold">{numberOfCicles}</span>
+      </div>
+      <div className="text-3xl p-1">
+        <span className="font-semibold">Modo:</span> {focus >= 0 ? "Foco" : "Descanso"}
+      </div>
+      <div className="text-3xl p-1 flex flex-col justify-center items-center text-center md:flex-row">
+        <button onClick={handleStart} className="py-3 px-1 m-1 text-lg font-semibold rounded-md bg-emerald-500 hover:bg-emerald-400 w-6/12 md:w-2/12 md:text-2xl">
           Começar
         </button>
-        <button onClick={handleStop} className="p-2">
+        <button onClick={handleStop} className="py-3 px-4 m-1 text-lg font-semibold rounded-md bg-red-500 hover:bg-red-400 w-6/12 md:w-2/12 md:text-2xl">
           Parar
         </button>
-        <button onClick={handleRestart} className="p-2">
+        <button onClick={handleRestart} className="py-3 px-4 m-1 text-lg font-semibold rounded-md bg-cyan-500 hover:bg-cyan-400 w-6/12 md:w-2/12 md:text-2xl">
           Recomeçar
         </button>
       </div>
